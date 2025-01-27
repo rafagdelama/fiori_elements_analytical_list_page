@@ -180,6 +180,96 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+                <!-- >CREACION OBJECT PAGE</!-->
+                <!-- >fieldgroup necesita una faceta</!-->
+                <Annotation Term="UI.FieldGroup" Qualifier="FirstGroup" >
+                    <Record Type="UI.FieldGroupType">
+                    <PropertyValue Property="Data">
+                        <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Airline"/>
+                            <PropertyValue Property="Label" String="{@i18n>airline}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BookNumber"/>
+                            <PropertyValue Property="Label" String="{@i18n>bookNumber}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BookingPrice"/>
+                            <PropertyValue Property="Label" String="{@i18n>bookingPrice}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="FlightConnection"/>
+                            <PropertyValue Property="Label" String="{@i18n>fligthconnection}"/>
+                        </Record>
+                        </Collection>
+                    </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="SecondGroup" >
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Customer"/>
+                                    <PropertyValue Property="Label" String="{@i18n>customer}"/>
+                                </Record>
+                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CustomerCountry"/>
+                                    <PropertyValue Property="Label" String="{@i18n>customerCountry}"/>
+                                </Record>
+                                 <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CustomerCity"/>
+                                    <PropertyValue Property="Label" String="{@i18n>customerCity}"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="ThirdGroup" >
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TravelAgency"/>
+                                    <PropertyValue Property="Label" String="{@i18n>travelAgency}"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TravelAgencyCountry"/>
+                                    <PropertyValue Property="Label" String="{@i18n>travelAgencyCountry}"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="TravelAgencyCity"/>
+                                    <PropertyValue Property="Label" String="{@i18n>travelAgencyCity}"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <!-- >facet</!-->
+                <Annotation Term="UI.Facets" >
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#FirstGroup"/>
+                                        <PropertyValue Property="Label" String="{@i18n>airline}"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#SecondGroup"/>
+                                        <PropertyValue Property="Label" String="{@i18n>customer}"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#ThirdGroup"/>
+                                        <PropertyValue Property="Label" String="{@i18n>travelAgency}"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                            <PropertyValue Property="Label" String="{@i18n>generalInformation}"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="UI.PresentationVariant" Qualifier="VisualFilterDonut">
                     <Record Type="UI.PresentationVariantType">
                         <PropertyValue Property="Visualizations">
