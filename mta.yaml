@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: alp
+version: 0.0.1
+modules:
+- name: alp-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: alp-destination-service
+    parameters:
+      content-target: true
+  - name: alp_html_repo_host
+    parameters:
+      service-key:
+        name: alp_html_repo_host-key
+  - name: uaa_alp
+    parameters:
+      service-key:
+        name: uaa_alp-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: AnalyticalList_Page_alp_html_repo_host
+          ServiceInstanceName: alp-html5-app-host-service
+          ServiceKeyName: alp_html_repo_host-key
+          sap.cloud.service: AnalyticalList_Page
+        - Authentication: OAuth2UserTokenExchange
+          Name: AnalyticalList_Page_uaa_alp
+          ServiceInstanceName: alp-xsuaa-service
+          ServiceKeyName: uaa_alp-key
+          sap.cloud.service: AnalyticalList_Page
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: alp-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: alp_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - alp.zip
+      name: alp
+      target-path: resources/
+- name: alp
+  type: html5
+  path: alp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: alp-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: alp-destination-service
+    service-plan: lite
+- name: alp_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: alp-html5-app-host-service
+    service-plan: app-host
+- name: uaa_alp
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: alp-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
